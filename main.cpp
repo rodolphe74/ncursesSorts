@@ -4,6 +4,7 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <utility>
+#include <math.h>
 
 int x, y;
 int sz = 0;
@@ -61,6 +62,31 @@ void jumpDownSort()
 
 }
 
+void combSort()
+{
+    float interval = sz;
+    int iinterval;
+    bool swap = false;
+    int i = 0;
+    while (interval > 1 || swap == true) {
+        interval = interval / 1.3f;
+        if (interval < 1)
+            interval = 1;
+
+        i = 0;
+        swap = false;
+        iinterval = (int) roundf(interval);
+
+        while (i < (sz - iinterval)) {
+            if (array[i] > array[i + iinterval]) {
+                std::swap(array[i], array[i + iinterval]);
+                swap = true;
+                dispArray();
+            }
+            i++;
+        }
+    }
+}
 
 
 int main(int argc, char *argv[])
@@ -79,7 +105,9 @@ int main(int argc, char *argv[])
     dispArray();
     getch();
 
-    jumpDownSort();
+    //jumpDownSort();
+    combSort();
+    //bubbleSort();
     getch();
 
     delete[] array;
