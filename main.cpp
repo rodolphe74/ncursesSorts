@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <cstdlib> 
 #include <ctime> 
+#include <type_traits>
 #include <utility>
 #include <math.h>
 
@@ -89,8 +90,36 @@ void combSort()
 }
 
 
+int partition(int first, int last, int pivot)
+{
+    std::swap(array[pivot], array[last]);
+    int j = first;
+    for (int i = first; i < last; i++) {
+        if (array[i] <= array[last]) {
+            std::swap(array[i], array[j]);
+            // dispArray();
+            j++;
+        }
+    }
+    std::swap(array[last], array[j]);
+    dispArray();
+    return j;
+}
+
+void quickSort(int first, int last)
+{
+    if (first < last) {
+        int pivot = (rand() % (last - first)) + first;
+        pivot = partition(first, last, pivot);
+        quickSort(first, pivot - 1);
+        quickSort(pivot + 1, last);
+    }
+}
+
+
 int main(int argc, char *argv[])
 {
+    srand(time(NULL));
     initscr();			/* Start curses mode 		  */
     x = getmaxx(stdscr);
     y = getmaxy(stdscr);
@@ -106,8 +135,9 @@ int main(int argc, char *argv[])
     getch();
 
     //jumpDownSort();
-    combSort();
+    //combSort();
     //bubbleSort();
+    quickSort(0, sz - 1);
     getch();
 
     delete[] array;
