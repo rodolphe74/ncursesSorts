@@ -2,13 +2,19 @@ CC=g++
 CFLAGS=-Wall -Werror -O2
 CLIBS=-lcurses -lform -lcaca
 
-all: Array CacaTest CacaSort
+all: Array BubbleTh CacaTest CacaSort
 
 Array: main.o 
 	$(CC) $(CFLAGS) -o Array main.o $(CLIBS)
 
 main.o: main.cpp 
 	$(CC) $(CFLAGS) -c main.cpp 
+
+BubbleTh: bubbleth.o
+	$(CC) $(CFLAGS) -o BubbleTh bubbleth.o $(CLIBS)
+
+bubbleth.o: bubbleth.cpp
+	$(CC) $(CFLAGS) -c bubbleth.cpp
 
 
 CacaTest: cacatest.o
@@ -27,4 +33,4 @@ cacasort.o: cacasort.cpp
 .PHONY: clean
 
 clean:
-	-rm -f *.o Array
+	-rm -f *.o Array BubbleTh CacaTest CacaSort
