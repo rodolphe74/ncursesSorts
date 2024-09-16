@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
         dispArray();
         std::this_thread::sleep_for(20ms);
     }
+    sortThread.join();
     getch();
 
     delete[] array;
